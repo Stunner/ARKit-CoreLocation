@@ -12,6 +12,7 @@ import CoreLocation
 import MapKit
 import SceneKit
 
+@available(iOS 11.0, *)
 extension SceneLocationView {
   
   func addAnnotation(_ annotation: MKAnnotation) {
@@ -59,7 +60,11 @@ extension LocationNode {
     let lightNode = SCNNode()
     lightNode.light = SCNLight()
     lightNode.light!.type = .ambient
-    lightNode.light!.intensity = 25
+    if #available(iOS 10.0, *) {
+        lightNode.light!.intensity = 25
+    } else {
+        // Fallback on earlier versions
+    }
     lightNode.light!.attenuationStartDistance = 100
     lightNode.light!.attenuationEndDistance = 100
     lightNode.position = SCNVector3(x: 0, y: 10, z: 0)
@@ -69,7 +74,11 @@ extension LocationNode {
     let lightNode3 = SCNNode()
     lightNode3.light = SCNLight()
     lightNode3.light!.type = .omni
-    lightNode3.light!.intensity = 100
+    if #available(iOS 10.0, *) {
+        lightNode3.light!.intensity = 100
+    } else {
+        // Fallback on earlier versions
+    }
     lightNode3.light!.attenuationStartDistance = 100
     lightNode3.light!.attenuationEndDistance = 100
     lightNode3.light!.castsShadow = true
